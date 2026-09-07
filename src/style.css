@@ -404,12 +404,12 @@ body {
 .observaciones {
   display: flex;
   align-items: flex-start;
-  gap: 6px;
-  margin: 0 0 8px;
+  gap: 8px;
+  margin: 0 0 2px;
   padding-top: 12px;
   border-top: 1px dashed #252525;
   color: #777;
-  font-size: 13px;
+  font-size: 15px;
   font-style: italic;
   line-height: 1.5;
 }
@@ -422,7 +422,7 @@ body {
   border: none;
   background: transparent;
   color: #777;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 700;
   font-family: inherit;
   cursor: pointer;

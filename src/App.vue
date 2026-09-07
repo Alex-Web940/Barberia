@@ -106,11 +106,13 @@
 
             <div class="observaciones-zona" v-if="editandoObservacionId !== servicio.id">
               <p class="observaciones" v-if="servicio.observaciones">
-                <span class="material-symbols-outlined meta-icono">edit_note</span>
+                <span class="material-symbols-outlined">
+                  edit_note
+                </span>
                 {{ servicio.observaciones }}
               </p>
               <button class="enlace-observacion" @click="abrirEdicionObservacion(servicio.id)">
-                <span class="material-symbols-outlined" v-if="servicio.observaciones">edit</span>
+                <span class="material-symbols-outlined" v-if="servicio.observaciones"></span>
                 <span class="material-symbols-outlined" v-else>add_circle</span>
                 {{ servicio.observaciones ? 'Editar observación' : 'Agregar observación' }}
               </button>
@@ -141,7 +143,8 @@
 
     </main>
 
-    <button class="boton-flotante" :class="{ girado: mostrarFormulario }" @click="abrirFormulario()" aria-label="Agregar servicio">+</button>
+    <button class="boton-flotante" :class="{ girado: mostrarFormulario }" @click="abrirFormulario()"
+      aria-label="Agregar servicio">+</button>
 
     <div class="superposicion" v-if="mostrarFormulario">
       <div class="modal">
@@ -187,7 +190,7 @@
           <div class="fila-campos">
             <div class="campo">
               <label>Fecha</label>
-              <input type="date" v-model="formulario.fecha" :min="fechaMinima()" >
+              <input type="date" v-model="formulario.fecha" :min="fechaMinima()">
             </div>
             <div class="campo">
               <label>Hora</label>
@@ -317,12 +320,12 @@ function esHoy(fechaHora) {
   const dia = String(ahora.getDate()).padStart(2, '0')
   const hoy = `${año}-${mes}-${dia}`
   return fechaHora.startsWith(hoy)
-} 
+}
 
-function fechaMinima(){
+function fechaMinima() {
   const ahora = new Date()
   const año = ahora.getFullYear()
-  const mes = String(ahora.getMonth() + 1).padStart (2, '0')
+  const mes = String(ahora.getMonth() + 1).padStart(2, '0')
   const dia = String(ahora.getDate()).padStart(2, '0')
   return `${año}-${mes}-${dia}`
 }
@@ -433,14 +436,14 @@ function validarFormulario() {
   if (!f.fecha) {
     return 'Selecciona la fecha del servicio.'
   }
-  if (!f.fecha < fechaMinima()){
+  if (!f.fecha < fechaMinima()) {
     return 'no se puede agendar citas antes de hoy '
   }
   if (!f.hora) {
     return 'Selecciona la hora del servicio.'
   }
 
-  if(f.hora < '08:00' || f.hora > '20.00'){
+  if (f.hora < '08:00' || f.hora > '20.00') {
     return 'la hora debe de estar entre las 08:00 A.M y 8:00 P.M'
   }
   if (!f.metodoPago) {
