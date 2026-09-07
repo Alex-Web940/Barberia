@@ -143,7 +143,7 @@
 
     <button class="boton-flotante" :class="{ girado: mostrarFormulario }" @click="abrirFormulario()" aria-label="Agregar servicio">+</button>
 
-    <div class="superposicion" v-if="mostrarFormulario" @click.self="cerrarFormulario">
+    <div class="superposicion" v-if="mostrarFormulario">
       <div class="modal">
 
         <h2>{{ editandoId ? 'Editar servicio' : 'Nuevo servicio' }}</h2>
@@ -187,11 +187,11 @@
           <div class="fila-campos">
             <div class="campo">
               <label>Fecha</label>
-              <input type="date" v-model="formulario.fecha">
+              <input type="date" v-model="formulario.fecha" :min="fechaMinima()" >
             </div>
             <div class="campo">
               <label>Hora</label>
-              <input type="time" v-model="formulario.hora">
+              <input type="time" v-model="formulario.hora" min="08:00" max="20:00">
             </div>
           </div>
 
@@ -293,7 +293,7 @@ function calcularPrecio() {
 
 function resumenTipos() {
   if (formulario.value.tipos.length === 0) return 'Seleccionar servicios...'
-  return formulario.value.tipos.join('- ')
+  return formulario.value.tipos.join(' - ')
 }
 
 function alternarTiposMenu() {
@@ -318,6 +318,14 @@ function esHoy(fechaHora) {
   const hoy = `${año}-${mes}-${dia}`
   return fechaHora.startsWith(hoy)
 } 
+
+function fechaMinima(){
+  const ahora = new Date()
+  const año = ahora.getFullYear()
+  const mes = String(ahora.getMonth() + 1).padStart (2, '0')
+  const dia = String(ahora.getDate()).padStart(2, '0')
+  return `${año}-${mes}-${dia}`
+}
 
 function totalHoy() {
   return servicios.value
@@ -425,8 +433,15 @@ function validarFormulario() {
   if (!f.fecha) {
     return 'Selecciona la fecha del servicio.'
   }
+  if (!f.fecha < fechaMinima()){
+    return 'no se puede agendar citas antes de hoy '
+  }
   if (!f.hora) {
     return 'Selecciona la hora del servicio.'
+  }
+
+  if(f.hora < '08:00' || f.hora > '20.00'){
+    return 'la hora debe de estar entre las 08:00 A.M y 8:00 P.M'
   }
   if (!f.metodoPago) {
     return 'Selecciona el método de pago.'
