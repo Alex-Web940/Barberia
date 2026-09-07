@@ -194,7 +194,7 @@
             </div>
             <div class="campo">
               <label>Hora</label>
-              <input type="time" v-model="formulario.hora" min="08:00" max="20:00">
+              <input type="time" v-model="formulario.hora">
             </div>
           </div>
 
@@ -248,12 +248,12 @@ import { useLocalStorage } from '@vueuse/core'
 const barberos = ['Don Ramiro', 'Julián', 'Kevin']
 
 const tiposServicio = [
-  { nombre: 'Corte clásico', precio: 20000 },
-  { nombre: 'Corte moderno', precio: 25000 },
+  { nombre: 'Corte de cabello', precio: 20000 },
+  { nombre: 'tratamiento capilar', precio: 25000 },
   { nombre: 'Barba', precio: 15000 },
   { nombre: 'Cejas', precio: 8000 },
   { nombre: 'Tinte', precio: 40000 },
-  { nombre: 'Corte niño', precio: 18000 },
+  { nombre: 'exfoliación', precio: 18000 },
   { nombre: 'Retoque', precio: 10000 }
 ]
 
